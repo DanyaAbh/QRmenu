@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3:*)",
+      "Bash(git init)",
+      "Bash(git add yanina_v6.html)",
+      "Bash(git commit:*)",
+      "Bash(gh auth status)",
+      "Bash(git push -u origin main)",
+      "Bash(brew install gh)",
+      "Bash(git fetch origin claude/crepe-menu-app-FIINu)",
+      "Bash(git ls-tree --name-only origin/claude/crepe-menu-app-FIINu)",
+      "Bash(git push origin --delete claude/crepe-menu-app-FIINu)",
+      "Bash(git remote set-url origin git@github.com:DanyaAbh/QRmenu.git)"
+    ]
+  }
+}
