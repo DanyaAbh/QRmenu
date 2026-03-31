@@ -87,17 +87,17 @@
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
     border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-    padding: max(16px, env(safe-area-inset-top)) 20px 14px;
+    padding: max(14px, env(safe-area-inset-top)) 20px 12px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 4px 20px rgba(180, 80, 20, 0.08);
   }
 
   .brand {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     text-align: center;
   }
 
@@ -277,6 +277,13 @@
     padding-right: 8px;
   }
 
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
   .badge {
     display: inline-flex;
     align-items: center;
@@ -287,7 +294,6 @@
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 999px;
-    margin-bottom: 10px;
     backdrop-filter: var(--blur-sm);
     -webkit-backdrop-filter: var(--blur-sm);
   }
@@ -297,6 +303,13 @@
     border: 1px solid rgba(255, 255, 255, 0.68);
     color: rgba(70, 32, 10, 0.70);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  }
+
+  .badge-lead {
+    background: rgba(90, 165, 105, 0.20);
+    border: 1px solid rgba(115, 180, 120, 0.48);
+    color: rgba(44, 108, 52, 0.92);
+    box-shadow: 0 1px 0 rgba(210, 250, 214, 0.66) inset;
   }
 
   .dish-name {
@@ -345,10 +358,57 @@
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.10));
   }
 
+  .dish-photo.photo-fit-wide {
+    width: 166px;
+    height: 166px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+  }
+
+  .dish-photo.photo-fit-medium {
+    width: 160px;
+    height: 160px;
+    margin-right: 12px;
+    margin-bottom: 4px;
+  }
+
+  .dish-photo.photo-fit-compact {
+    width: 154px;
+    height: 154px;
+    margin-right: 14px;
+    margin-bottom: 6px;
+  }
+
   .card-body {
     padding: 14px 20px 20px;
     position: relative;
     z-index: 1;
+  }
+
+  .packaged-card .card-top {
+    min-height: 0;
+    padding: 18px 20px 0;
+    align-items: flex-start;
+  }
+
+  .packaged-card .card-top-text {
+    padding-right: 0;
+  }
+
+  .group-photo-ph {
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.82) inset;
+    margin-left: 12px;
+    flex-shrink: 0;
   }
 
   .option-heading,
@@ -662,6 +722,92 @@
     font-size: 15px;
   }
 
+  .group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .group-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .group-row:first-child {
+    padding-top: 2px;
+  }
+
+  .group-row:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .group-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .group-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .group-note {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(90, 58, 32, 0.48);
+    line-height: 1.35;
+    margin-top: 3px;
+  }
+
+  .group-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .group-price {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--accent);
+    min-width: 52px;
+    text-align: right;
+  }
+
+  .group-add {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(255, 130, 60, 0.92), rgba(255, 80, 80, 0.82));
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 100, 40, 0.22);
+    transition: transform 0.12s ease, background 0.2s ease;
+    font-family: "Nunito", sans-serif;
+  }
+
+  .group-add:active {
+    transform: scale(0.9);
+  }
+
+  .group-add.done {
+    background: rgba(50, 180, 100, 0.85);
+    font-size: 14px;
+  }
+
   .cart-overlay {
     position: fixed;
     inset: 0;
@@ -921,15 +1067,14 @@
     <div class="logo-wrap">
       <img class="logo-mark" src="assets/loggo.png" alt="Янина семейная пекарня">
     </div>
-    <div class="logo-sub">Блины, начинки и напитки каждый день.</div>
   </div>
   <div class="header-nav">
     <div class="cats">
-      <button class="cat active" data-top-nav="all" onclick="scrollToSection('top')">Все</button>
-      <button class="cat" data-top-nav="main" onclick="scrollToSection('main')">Основное меню</button>
+      <button class="cat active" data-top-nav="blini" onclick="scrollToSection('blini')">Блины и вафли</button>
+      <button class="cat" data-top-nav="desserts" onclick="scrollToSection('desserts')">Десерты</button>
       <button class="cat" data-top-nav="pizza" onclick="scrollToSection('pizza')">Пицца</button>
       <button class="cat" data-top-nav="bread" onclick="scrollToSection('bread')">Хлеб</button>
-      <button class="cat" data-top-nav="soups" onclick="scrollToSection('soups')">Супы и каши</button>
+      <button class="cat" data-top-nav="soups" onclick="scrollToSection('soups')">Супы</button>
       <button class="cat" data-top-nav="drinks" onclick="scrollToSection('coffee')">Напитки</button>
     </div>
     <div class="subcats" id="drink-nav">
@@ -937,6 +1082,10 @@
       <button class="subcat" data-drink-nav="tea" onclick="scrollToSection('tea')">Чай</button>
       <button class="subcat" data-drink-nav="cocoa" onclick="scrollToSection('cocoa')">Какао</button>
       <button class="subcat" data-drink-nav="lemonade" onclick="scrollToSection('lemonade')">Лимонады</button>
+      <button class="subcat" data-drink-nav="fresh" onclick="scrollToSection('fresh')">Фреш</button>
+      <button class="subcat" data-drink-nav="smoothies" onclick="scrollToSection('smoothies')">Смузи</button>
+      <button class="subcat" data-drink-nav="milkshakes" onclick="scrollToSection('milkshakes')">Милкшейки</button>
+      <button class="subcat" data-drink-nav="packaged-drinks" onclick="scrollToSection('packaged-drinks')">Вода и соки</button>
     </div>
   </div>
 </div>
@@ -981,11 +1130,11 @@
           label: "База",
           icon: "🥄",
           items: [
-            { name: "СМЕТАНА", price: 50 },
-            { name: "СГУЩЕНКА", price: 50 },
-            { name: "МЕД", price: 100 },
-            { name: "МОРОЖЕНОЕ", price: 200 },
-            { name: "ТВОРОГ", price: 200 }
+            { name: "СМЕТАНА", price: 50, imageSrc: "assets/toppings/sweet/sour-cream.png" },
+            { name: "СГУЩЕНКА", price: 50, imageSrc: "assets/toppings/sweet/condensed-milk.png" },
+            { name: "МЕД", price: 100, imageSrc: "assets/toppings/sweet/honey.png" },
+            { name: "МОРОЖЕНОЕ", price: 200, imageSrc: "assets/toppings/sweet/ice-cream.png" },
+            { name: "ТВОРОГ", price: 200, imageSrc: "assets/toppings/sweet/cottage-cheese.png" }
           ]
         },
         {
@@ -993,11 +1142,11 @@
           label: "Кремы",
           icon: "🍫",
           items: [
-            { name: "ФИРМЕННЫЙ КРЕМ (КРЕМ СЫР, СГУЩЕНКА)", price: 200 },
-            { name: "УРБЕЧ МИНДАЛЬНЫЙ", price: 200 },
-            { name: "НУТЕЛЛА", price: 200 },
-            { name: "БЕЛЬГИЙСКИЙ ШОКОЛАД", price: 200 },
-            { name: "КАРАМЕЛЬ", price: 200 }
+            { name: "ФИРМЕННЫЙ КРЕМ (КРЕМ СЫР, СГУЩЕНКА)", price: 200, imageSrc: "assets/toppings/sweet/signature-cream.png" },
+            { name: "УРБЕЧ МИНДАЛЬНЫЙ", price: 200, imageSrc: "assets/toppings/sweet/almond-urbech.png" },
+            { name: "НУТЕЛЛА", price: 200, imageSrc: "assets/toppings/sweet/nutella.png" },
+            { name: "БЕЛЬГИЙСКИЙ ШОКОЛАД", price: 200, imageSrc: "assets/toppings/sweet/belgian-chocolate.png" },
+            { name: "КАРАМЕЛЬ", price: 200, imageSrc: "assets/toppings/sweet/caramel.png" }
           ]
         },
         {
@@ -1005,25 +1154,24 @@
           label: "Фрукты",
           icon: "🍌",
           items: [
-            { name: "БАНАН", price: 100 },
-            { name: "ЯБЛОКО", price: 100 },
-            { name: "ГРУША", price: 100 },
-            { name: "КИВИ", price: 100 },
-            { name: "МАНГО", price: 200 }
+            { name: "БАНАН", price: 100, imageSrc: "assets/toppings/sweet/banana.png" },
+            { name: "ЯБЛОКО", price: 100, imageSrc: "assets/toppings/sweet/apple.png" },
+            { name: "ГРУША", price: 100, imageSrc: "assets/toppings/sweet/pear.png" },
+            { name: "КИВИ", price: 100, imageSrc: "assets/toppings/sweet/kiwi.png" },
+            { name: "МАНГО", price: 200, imageSrc: "assets/toppings/sweet/mango.png" }
           ]
         },
         {
           id: "berries",
           label: "Ягоды",
           icon: "🍓",
-          imageSrc: "assets/малина.png",
           items: [
-            { name: "КЛУБНИКА", price: 200 },
-            { name: "ВИШНЯ", price: 200 },
-            { name: "МАЛИНА", price: 200 },
-            { name: "ДЖЕМ ЯГОДНЫЙ", price: 100 },
-            { name: "МИКС СВЕЖИХ ЯГОД", price: 200 },
-            { name: "МИКС ЯГОД ПРИПУЩЕННЫХ", price: 200 }
+            { name: "КЛУБНИКА", price: 200, imageSrc: "assets/toppings/sweet/strawberry.png" },
+            { name: "ВИШНЯ", price: 200, imageSrc: "assets/toppings/sweet/cherry.png" },
+            { name: "МАЛИНА", price: 200, imageSrc: "assets/toppings/sweet/raspberry.png" },
+            { name: "ДЖЕМ ЯГОДНЫЙ", price: 100, imageSrc: "assets/toppings/sweet/berry-jam.png" },
+            { name: "МИКС СВЕЖИХ ЯГОД", price: 200, imageSrc: "assets/toppings/sweet/fresh-berry-mix.png" },
+            { name: "МИКС ЯГОД ПРИПУЩЕННЫХ", price: 200, imageSrc: "assets/toppings/sweet/stewed-berry-mix.png" }
           ]
         }
       ]
@@ -1036,14 +1184,14 @@
           label: "Сыры и база",
           icon: "🧀",
           items: [
-            { name: "МОЦАРЕЛЛА", price: 200 },
-            { name: "КРЕМ СЫР", price: 200 },
-            { name: "СЫР ЧЕДДЕР", price: 150 },
-            { name: "СЫР ТОФУ (ГОТОВИМ В ПОСТ)", price: 200 },
-            { name: "СЛИВОЧНОЕ МАСЛО", price: 50 },
-            { name: "ЯЙЦО ПАШОТ (1 ЯЙЦО)", price: 100 },
-            { name: "ЯЙЦО СКРЕМБЛ (1 ЯЙЦО)", price: 100 },
-            { name: "ЯЙЦО ГЛАЗУНЬЯ (1 ЯЙЦО)", price: 100 }
+            { name: "МОЦАРЕЛЛА", price: 200, imageSrc: "assets/toppings/nosweet/mozzarella.png" },
+            { name: "КРЕМ СЫР", price: 200, imageSrc: "assets/toppings/nosweet/cream-cheese.png" },
+            { name: "СЫР ЧЕДДЕР", price: 150, imageSrc: "assets/toppings/nosweet/cheddar.png" },
+            { name: "СЫР ТОФУ (ГОТОВИМ В ПОСТ)", price: 200, imageSrc: "assets/toppings/nosweet/tofu.png" },
+            { name: "СЛИВОЧНОЕ МАСЛО", price: 50, imageSrc: "assets/toppings/nosweet/butter.png" },
+            { name: "ЯЙЦО ПАШОТ (1 ЯЙЦО)", price: 100, imageSrc: "assets/toppings/nosweet/poached-egg.png" },
+            { name: "ЯЙЦО СКРЕМБЛ (1 ЯЙЦО)", price: 100, imageSrc: "assets/toppings/nosweet/scrambled-egg.png" },
+            { name: "ЯЙЦО ГЛАЗУНЬЯ (1 ЯЙЦО)", price: 100, imageSrc: "assets/toppings/nosweet/fried-egg.png" }
           ]
         },
         {
@@ -1051,16 +1199,16 @@
           label: "Мясо и море",
           icon: "🥓",
           items: [
-            { name: "ВЕТЧИНА", price: 150 },
-            { name: "БЕКОН", price: 150 },
-            { name: "ИНДЕЙКА ЗАПЕЧЕННАЯ", price: 200 },
-            { name: "КОЛБАСКА ИЗ ГОВЯДИНЫ", price: 200 },
-            { name: "КУРИЦА", price: 200 },
-            { name: "ГОВЯДИНА (ФАРШ)", price: 300 },
-            { name: "УТКА", price: 300 },
-            { name: "КРЕВЕТКИ", price: 250 },
-            { name: "СЕМГА СЛАБОСОЛЕНАЯ", price: 250 },
-            { name: "ИКРА КРАСНАЯ", price: 400 }
+            { name: "ВЕТЧИНА", price: 150, imageSrc: "assets/toppings/nosweet/ham.png" },
+            { name: "БЕКОН", price: 150, imageSrc: "assets/toppings/nosweet/bacon.png" },
+            { name: "ИНДЕЙКА ЗАПЕЧЕННАЯ", price: 200, imageSrc: "assets/toppings/nosweet/roasted-turkey.png" },
+            { name: "КОЛБАСКА ИЗ ГОВЯДИНЫ", price: 200, imageSrc: "assets/toppings/nosweet/beef-sausage.png" },
+            { name: "КУРИЦА", price: 200, imageSrc: "assets/toppings/nosweet/chicken.png" },
+            { name: "ГОВЯДИНА (ФАРШ)", price: 300, imageSrc: "assets/toppings/nosweet/minced-beef.png" },
+            { name: "УТКА", price: 300, imageSrc: "assets/toppings/nosweet/duck.png" },
+            { name: "КРЕВЕТКИ", price: 250, imageSrc: "assets/toppings/nosweet/shrimp.png" },
+            { name: "СЕМГА СЛАБОСОЛЕНАЯ", price: 250, imageSrc: "assets/toppings/nosweet/salmon.png" },
+            { name: "ИКРА КРАСНАЯ", price: 400, imageSrc: "assets/toppings/nosweet/red-caviar.png" }
           ]
         },
         {
@@ -1069,14 +1217,14 @@
           icon: "🥬",
           items: [
             { name: "КАПУСТА ТУШЕНАЯ / СВЕКЛА / ОВОЩИ (ГОТОВИМ В ПОСТ)", price: 150 },
-            { name: "ХАЛАПЕНЬО", price: 50 },
-            { name: "АВОКАДО", price: 100 },
-            { name: "ТОМАТЫ ВЯЛЕНЫЕ", price: 100 },
-            { name: "ТОМАТЫ СВЕЖИЕ", price: 100 },
-            { name: "ОГУРЦЫ", price: 100 },
-            { name: "МИКС САЛАТОВ С ТОМАТАМИ / С ОГУРЦАМИ", price: 250 },
-            { name: "РУККОЛА", price: 100 },
-            { name: "КИНОА", price: 100 }
+            { name: "ХАЛАПЕНЬО", price: 50, imageSrc: "assets/toppings/nosweet/jalapeno.png" },
+            { name: "АВОКАДО", price: 100, imageSrc: "assets/toppings/nosweet/avocado.png" },
+            { name: "ТОМАТЫ ВЯЛЕНЫЕ", price: 100, imageSrc: "assets/toppings/nosweet/sun-dried-tomatoes.png" },
+            { name: "ТОМАТЫ СВЕЖИЕ", price: 100, imageSrc: "assets/toppings/nosweet/fresh-tomatoes.png" },
+            { name: "ОГУРЦЫ", price: 100, imageSrc: "assets/toppings/nosweet/cucumber.png" },
+            { name: "МИКС САЛАТОВ С ТОМАТАМИ / С ОГУРЦАМИ", price: 250, imageSrc: "assets/toppings/nosweet/salad-mix.png" },
+            { name: "РУККОЛА", price: 100, imageSrc: "assets/toppings/nosweet/arugula.png" },
+            { name: "КИНОА", price: 100, imageSrc: "assets/toppings/nosweet/quinoa.png" }
           ]
         },
         {
@@ -1084,7 +1232,7 @@
           label: "Грибы",
           icon: "🍄",
           items: [
-            { name: "ШАМПИНЬОНЫ", price: 200 }
+            { name: "ШАМПИНЬОНЫ", price: 200, imageSrc: "assets/toppings/nosweet/mushrooms.png" }
           ]
         }
       ]
@@ -1093,23 +1241,28 @@
 
   const MENU_SECTIONS = [
     {
-      id: "main",
-      label: "Основное меню",
+      id: "blini",
+      label: "Блины и вафли",
       icon: "🥞",
       items: [
-        { id: "blin-base", name: "БЛИН БЕЗ НАЧИНКИ 1 ШТ", displayName: "Блины без начинки", portionText: "1 шт", weightText: "120 г", caloriesText: "~220 ккал", imageSrc: "assets/блин.png", emoji: "🥞", badge: "Основа", note: "Можно собрать как сладкий или несладкий вариант", removableIngredients: ["Глютен", "Молочное", "Яйца"], basePrice: 250, toppingPools: ["sweet", "savory"] },
-        { id: "blin-post", name: "БЛИН ПОСТНЫЙ БЕЗ НАЧИНКИ 1 ШТ", displayName: "Постные блины без начинки", portionText: "1 шт", weightText: "120 г", caloriesText: "~200 ккал", imageSrc: "assets/блин.png", emoji: "🌾", badge: "Основа", note: "Можно собрать как сладкий или несладкий вариант", basePrice: 250, toppingPools: ["sweet", "savory"] },
+        { id: "blin-base", name: "БЛИН БЕЗ НАЧИНКИ 1 ШТ", displayName: "Блины без начинки", portionText: "1 шт", weightText: "120 г", caloriesText: "~220 ккал", imageSrc: "assets/блин.png", emoji: "🥞", badge: "Основа", note: "Можно собрать как сладкий или несладкий вариант", removableIngredients: ["Глютен", "Молочное", "Яйца"], dynamicBadges: [{ label: "Постное", requiresRemoved: ["Молочное", "Яйца"] }], basePrice: 250, toppingPools: ["sweet", "savory"] },
         { id: "waffle-sourdough", name: "ВАФЛЯ БЕЛЬГИЙСКАЯ НА ЗАКВАСКЕ 1 ШТ", displayName: "Вафля бельгийская на закваске", portionText: "1 шт", weightText: "200 г", caloriesText: "~390 ккал", imageSrc: "assets/вафли.png", emoji: "🧇", badge: "Основа", note: "Подходит для сладких добавок", removableIngredients: ["Глютен", "Яйца"], basePrice: 150, toppingPools: ["sweet"] },
         { id: "pancakes", name: "ПАНКЕЙКИ 3 ШТ", displayName: "Панкейки", portionText: "3 шт", weightText: "240 г", caloriesText: "~410 ккал", imageSrc: "assets/панкейк .png", emoji: "🥞", badge: "Основа", note: "Подходят для сладких добавок", removableIngredients: ["Глютен", "Молочное", "Яйца", "Сахар"], basePrice: 300, toppingPools: ["sweet"] },
-        { id: "bagel-base", name: "БЕЙГЛ 1 ШТ", displayName: "Бейгл", portionText: "1 шт", weightText: "120 г", caloriesText: "~290 ккал", emoji: "🥯", badge: "Основа", note: "Можно собрать как сладкий или несладкий вариант", basePrice: 150, toppingPools: ["sweet", "savory"] },
-        { id: "syrniki", name: "СЫРНИКИ НА РИСОВОЙ МУКЕ 3 ШТ СО СМЕТАНОЙ И ЯГОДНЫМ ДЖЕМОМ", displayName: "Сырники на рисовой муке", portionText: "3 шт", weightText: "250 г", caloriesText: "~350 ккал", emoji: "🧀", badge: "Подача", note: "Можно дополнить сладкими добавками", removableIngredients: ["Молочное", "Яйца"], basePrice: 400, toppingPools: ["sweet"] },
-        { id: "donut-chocolate", name: "ДОНАТ В ШОКОЛАДЕ 1 ШТ", displayName: "Донат в шоколаде", portionText: "1 шт", weightText: "80 г", caloriesText: "~280 ккал", emoji: "🍩", basePrice: 100 },
-        { id: "waffle-kolosok", name: "ВАФЛЯ КОЛОСОК В ШОКОЛАДЕ 1 ШТ", displayName: "Вафля колосок в шоколаде", portionText: "1 шт", weightText: "110 г", caloriesText: "~320 ккал", emoji: "🍫", basePrice: 250 },
-        { id: "ponchik-cream", name: "ПОНЧИК С КРЕМОМ 1 ШТ", displayName: "Пончик с кремом", portionText: "1 шт", weightText: "100 г", caloriesText: "~340 ккал", emoji: "🍩", basePrice: 250 },
-        { id: "ponchik-plain", name: "ПОНЧИК БЕЗ КРЕМА 1 ШТ", displayName: "Пончик без крема", portionText: "1 шт", weightText: "85 г", caloriesText: "~260 ккал", emoji: "🍩", basePrice: 150 },
-        { id: "strudel", name: "ШТРУДЕЛЬ С МОРОЖЕНЫМ", displayName: "Штрудель с мороженым", weightText: "220 г", caloriesText: "~520 ккал", emoji: "🍎", basePrice: 600 },
-        { id: "bun-streusel", name: "БУЛОЧКА СО ШТРЕЙЗЕЛЕМ 1 ШТ", displayName: "Булочка со штрейзелем", portionText: "1 шт", weightText: "90 г", caloriesText: "~260 ккал", emoji: "🧁", basePrice: 100 },
-        { id: "honey-cake", name: "МЕДОВЫЙ ТОРТ", displayName: "Медовый торт", weightText: "120 г", caloriesText: "~430 ккал", emoji: "🍰", basePrice: 250 },
+        { id: "bagel-base", name: "БЕЙГЛ 1 ШТ", displayName: "Бейгл", portionText: "1 шт", weightText: "120 г", caloriesText: "~290 ккал", imageSrc: "assets/Фрагмент 1.png", photoClass: "photo-fit-medium", emoji: "🥯", badge: "Основа", note: "Можно собрать как сладкий или несладкий вариант", basePrice: 150, toppingPools: ["sweet", "savory"] },
+      ]
+    },
+    {
+      id: "desserts",
+      label: "Десерты",
+      icon: "🍰",
+      items: [
+        { id: "syrniki", name: "СЫРНИКИ НА РИСОВОЙ МУКЕ 3 ШТ СО СМЕТАНОЙ И ЯГОДНЫМ ДЖЕМОМ", displayName: "Сырники на рисовой муке", portionText: "3 шт", weightText: "250 г", caloriesText: "~350 ккал", imageSrc: "assets/Фрагмент 2.png", photoClass: "photo-fit-medium", emoji: "🧀", badge: "Подача", note: "Можно дополнить сладкими добавками", removableIngredients: ["Молочное", "Яйца"], basePrice: 400, toppingPools: ["sweet"] },
+        { id: "donut-chocolate", name: "ДОНАТ В ШОКОЛАДЕ 1 ШТ", displayName: "Донат в шоколаде", portionText: "1 шт", weightText: "80 г", caloriesText: "~280 ккал", imageSrc: "assets/Фрагмент 3.png", photoClass: "photo-fit-compact", emoji: "🍩", basePrice: 100 },
+        { id: "waffle-kolosok", name: "ВАФЛЯ КОЛОСОК В ШОКОЛАДЕ 1 ШТ", displayName: "Вафля колосок в шоколаде", portionText: "1 шт", weightText: "110 г", caloriesText: "~320 ккал", imageSrc: "assets/Фрагмент 4.png", photoClass: "photo-fit-wide", emoji: "🍫", basePrice: 250 },
+        { id: "ponchiki", name: "ПОНЧИКИ", displayName: "Пончики", portionText: "1 шт", weightText: "85-100 г", caloriesText: "~260-340 ккал", imageSrc: "assets/пончик.png", photoClass: "photo-fit-compact", emoji: "🍩", note: "Выберите вариант", variants: [{ label: "БЕЗ КРЕМА", price: 150 }, { label: "С КРЕМОМ", price: 250 }] },
+        { id: "strudel", name: "ШТРУДЕЛЬ С МОРОЖЕНЫМ", displayName: "Штрудель с мороженым", weightText: "220 г", caloriesText: "~520 ккал", imageSrc: "assets/штрудель.png", photoClass: "photo-fit-wide", emoji: "🍎", basePrice: 600 },
+        { id: "bun-streusel", name: "БУЛОЧКА СО ШТРЕЙЗЕЛЕМ 1 ШТ", displayName: "Булочка со штрейзелем", portionText: "1 шт", weightText: "90 г", caloriesText: "~260 ккал", imageSrc: "assets/Булочка со штрейзелем.png", photoClass: "photo-fit-compact", emoji: "🧁", basePrice: 100 },
+        { id: "honey-cake", name: "МЕДОВЫЙ ТОРТ", displayName: "Медовый торт", weightText: "120 г", caloriesText: "~430 ккал", imageSrc: "assets/медовик.png", photoClass: "photo-fit-medium", emoji: "🍰", basePrice: 250 },
         { id: "baklava", name: "ПАХЛАВА", displayName: "Пахлава", weightText: "100 г", caloriesText: "~450 ккал", emoji: "🥮", basePrice: 250 },
         { id: "kartoshka", name: "ПИРОЖНОЕ КАРТОШКА", displayName: "Пирожное картошка", portionText: "1 шт", weightText: "85 г", caloriesText: "~330 ккал", emoji: "🍫", basePrice: 150 },
         { id: "mochi", name: "МОТИ 1 ШТ", displayName: "Моти", portionText: "1 шт", weightText: "55 г", caloriesText: "~130 ккал", emoji: "🍡", basePrice: 200 },
@@ -1201,26 +1354,126 @@
         { id: "lemon-citrus", name: "ЦИТРУСОВЫЙ", displayName: "Цитрусовый лимонад", caloriesText: "~110 ккал", emoji: "🍋", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 300 }, { label: "ГРАФИН", price: 450 }] },
         { id: "lemon-raspberry", name: "МАЛИНОВЫЙ", displayName: "Малиновый лимонад", caloriesText: "~120 ккал", emoji: "🍓", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 300 }, { label: "ГРАФИН", price: 450 }] },
         { id: "lemon-berry", name: "МИКС ЯГОД", displayName: "Лимонад микс ягод", caloriesText: "~125 ккал", emoji: "🫐", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 300 }, { label: "ГРАФИН", price: 450 }] },
-        { id: "lemon-mango", name: "МАНГО-МАРАКУЙЯ", displayName: "Лимонад манго-маракуйя", caloriesText: "~130 ккал", emoji: "🥭", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 300 }, { label: "ГРАФИН", price: 450 }] }
+        { id: "lemon-mango", name: "МАНГО-МАРАКУЙЯ", displayName: "Лимонад манго-маракуйя", caloriesText: "~130 ккал", emoji: "🥭", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 300 }, { label: "ГРАФИН", price: 450 }] },
+        { id: "lemon-mojito", name: "МОХИТО", displayName: "Лимонад мохито", caloriesText: "~115 ккал", emoji: "🌿", variants: [{ label: "0,3 Л", price: 250 }, { label: "0,4 Л", price: 250 }, { label: "ГРАФИН", price: 450 }] }
+      ]
+    },
+    {
+      id: "fresh",
+      label: "Фреш",
+      icon: "🍊",
+      items: [
+        { id: "fresh-orange", name: "АПЕЛЬСИН", displayName: "Апельсин", caloriesText: "~115 ккал", emoji: "🍊", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "fresh-grapefruit", name: "ГРЕЙПФРУТ", displayName: "Грейпфрут", caloriesText: "~105 ккал", emoji: "🍊", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "fresh-apple", name: "ЯБЛОКО", displayName: "Яблоко", caloriesText: "~120 ккал", emoji: "🍎", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "fresh-carrot", name: "МОРКОВЬ", displayName: "Морковь", caloriesText: "~95 ккал", emoji: "🥕", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "fresh-mix", name: "МИКС", displayName: "Микс", note: "Смешанный свежевыжатый фреш", caloriesText: "~110 ккал", emoji: "🍹", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] }
+      ]
+    },
+    {
+      id: "smoothies",
+      label: "Смузи",
+      icon: "🥤",
+      items: [
+        { id: "smoothie-berry", name: "МИКС ЯГОД (ВИШНЯ, КЛУБНИКА, МАЛИНА, ЧЕРНАЯ СМОРОДИНА)", displayName: "Микс ягод", note: "Вишня, клубника, малина, черная смородина", caloriesText: "~180 ккал", emoji: "🫐", variants: [{ label: "0,3 Л", price: 300 }, { label: "0,4 Л", price: 350 }] },
+        { id: "smoothie-strawberry-banana", name: "КЛУБНИКА-БАНАН", displayName: "Клубника-банан", caloriesText: "~190 ккал", emoji: "🍓", variants: [{ label: "0,3 Л", price: 300 }, { label: "0,4 Л", price: 350 }] },
+        { id: "smoothie-tropical", name: "ТРОПИЧЕСКИЙ (МАНГО, БАНАН, АПЕЛЬСИН)", displayName: "Тропический", note: "Манго, банан, апельсин", caloriesText: "~205 ккал", emoji: "🥭", variants: [{ label: "0,3 Л", price: 300 }, { label: "0,4 Л", price: 350 }] },
+        { id: "smoothie-detox", name: "ЗЕЛЕНЫЙ ДЕТОКС (ШПИНАТ, СЕЛЬДЕРЕЙ, ЯБЛОКО, БАНАН)", displayName: "Зеленый детокс", note: "Шпинат, сельдерей, яблоко, банан", caloriesText: "~165 ккал", emoji: "🥬", variants: [{ label: "0,3 Л", price: 300 }, { label: "0,4 Л", price: 350 }] }
+      ]
+    },
+    {
+      id: "milkshakes",
+      label: "Милкшейки",
+      icon: "🥛",
+      items: [
+        { id: "milkshake-vanilla", name: "ВАНИЛЬ", displayName: "Ваниль", caloriesText: "~240 ккал", emoji: "🍦", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "milkshake-banana", name: "БАНАН", displayName: "Банан", caloriesText: "~255 ккал", emoji: "🍌", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "milkshake-strawberry", name: "КЛУБНИКА", displayName: "Клубника", caloriesText: "~250 ккал", emoji: "🍓", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "milkshake-oreo", name: "ОРЕО", displayName: "Орео", caloriesText: "~285 ккал", emoji: "🍪", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] },
+        { id: "milkshake-chocolate", name: "ШОКОЛАД", displayName: "Шоколад", caloriesText: "~290 ккал", emoji: "🍫", variants: [{ label: "0,3 Л", price: 350 }, { label: "0,4 Л", price: 400 }] }
+      ]
+    },
+    {
+      id: "packaged-drinks",
+      label: "Вода и соки",
+      icon: "🧃",
+      items: [
+        {
+          id: "pack-water",
+          name: "ВОДА И СОКИ / ВОДА",
+          displayName: "Вода",
+          note: "Быстрый выбор без размера",
+          emoji: "💧",
+          groupedItems: [
+            { id: "kodor", name: "ВОДА КОДОР 0,5 Л С ГАЗОМ / БЕЗ ГАЗА", displayName: "Вода Кодор", note: "0,5 л · с газом / без газа", price: 100 },
+            { id: "auadhara", name: "АУАДХАРА 0,5 Л", displayName: "Ауадхара", note: "0,5 л", price: 100 }
+          ]
+        },
+        {
+          id: "pack-soda",
+          name: "ВОДА И СОКИ / ГАЗИРОВКА",
+          displayName: "Газировка",
+          note: "Фабричные напитки в стекле и ж/б",
+          emoji: "🥤",
+          groupedItems: [
+            { id: "cola-glass", name: "КОЛА СТЕКЛО 330 МЛ", displayName: "Кола стекло", note: "330 мл", price: 150 },
+            { id: "cola-can", name: "КОЛА / ПЕПСИ / ФАНТА Ж/Б 0,33 Л", displayName: "Кола / Пепси / Фанта", note: "ж/б · 0,33 л", price: 100 }
+          ]
+        },
+        {
+          id: "pack-juice",
+          name: "ВОДА И СОКИ / СОКИ",
+          displayName: "Соки",
+          note: "Фабричные соки и нектары",
+          emoji: "🧃",
+          groupedItems: [
+            { id: "rich", name: "РИЧ СТЕКЛО 0,2 Л ЯБЛОКО / МАНГО / ВИШНЯ / АПЕЛЬСИН / ПЕРСИК", displayName: "Rich", note: "0,2 л · яблоко / манго / вишня / апельсин / персик", price: 150 }
+          ]
+        },
+        {
+          id: "pack-cold-tea",
+          name: "ВОДА И СОКИ / ХОЛОДНЫЙ ЧАЙ",
+          displayName: "Холодный чай",
+          note: "Готовые бутылки на вынос",
+          emoji: "🍋",
+          groupedItems: [
+            { id: "lipton", name: "ЛИПТОН ПЛАСТИК 0,5 Л ПЕРСИК / ЗЕЛЕНЫЙ ЧАЙ / ЛИМОН", displayName: "Lipton", note: "0,5 л · персик / зелёный чай / лимон", price: 100 }
+          ]
+        }
       ]
     }
   ];
 
-  const DRINK_SECTION_IDS = ["coffee", "tea", "cocoa", "lemonade"];
+  const DRINK_NAV_ITEMS = [
+    { id: "coffee", label: "Кофе", target: "coffee" },
+    { id: "tea", label: "Чай", target: "tea" },
+    { id: "cocoa", label: "Какао", target: "cocoa" },
+    { id: "lemonade", label: "Лимонады", target: "lemonade" },
+    { id: "fresh", label: "Фреш", target: "fresh" },
+    { id: "smoothies", label: "Смузи", target: "smoothies" },
+    { id: "milkshakes", label: "Милкшейки", target: "milkshakes" },
+    { id: "packaged-drinks", label: "Вода и соки", target: "packaged-drinks" }
+  ];
+  const DRINK_SECTION_IDS = DRINK_NAV_ITEMS.map((item) => item.id);
   const TOP_NAV_BY_SECTION = {
-    main: "main",
+    blini: "blini",
+    desserts: "desserts",
     pizza: "pizza",
     bread: "bread",
     soups: "soups",
     coffee: "drinks",
     tea: "drinks",
     cocoa: "drinks",
-    lemonade: "drinks"
+    lemonade: "drinks",
+    fresh: "drinks",
+    smoothies: "drinks",
+    milkshakes: "drinks",
+    "packaged-drinks": "drinks"
   };
 
   const ITEM_INDEX = new Map();
   let cartItems = [];
-  let activeTopNav = "all";
+  let activeTopNav = "blini";
   let activeDrinkNav = "coffee";
   let scrollTicking = false;
 
@@ -1279,6 +1532,25 @@
       .join(" · ");
   }
 
+  function getActiveDynamicBadges(item, removedIngredients = []) {
+    if (!item || !Array.isArray(item.dynamicBadges)) return [];
+    return item.dynamicBadges
+      .filter((badge) => Array.isArray(badge.requiresRemoved) && badge.requiresRemoved.every((name) => removedIngredients.includes(name)))
+      .map((badge) => badge.label);
+  }
+
+  function renderBadgeRow(item, removedIngredients = []) {
+    const badges = [];
+    if (item.badge) {
+      badges.push(`<span class="badge badge-soft">${escapeHtml(item.badge)}</span>`);
+    }
+    getActiveDynamicBadges(item, removedIngredients).forEach((label) => {
+      badges.push(`<span class="badge badge-lead">${escapeHtml(label)}</span>`);
+    });
+    if (!badges.length) return "";
+    return `<div class="badge-row">${badges.join("")}</div>`;
+  }
+
   function renderVariantBlock(item) {
     if (!item.variants) return "";
     return `
@@ -1329,7 +1601,9 @@
             <div class="tops-scroll${index === 0 ? " active" : ""}" data-group-id="${item.id}-${poolId}-${group.id}">
               ${group.items.map((top) => {
                 const display = splitToppingLabel(top.name);
-                const media = group.imageSrc
+                const media = top.imageSrc
+                  ? `<img class="top-img" src="${escapeHtml(top.imageSrc)}" alt="${escapeHtml(display.primary)}">`
+                  : group.imageSrc
                   ? `<img class="top-img" src="${escapeHtml(group.imageSrc)}" alt="">`
                   : `<div class="top-icon">${group.icon}</div>`;
                 return `
@@ -1348,7 +1622,63 @@
     }).join("");
   }
 
+  function flashAddButton(button) {
+    if (!button) return;
+    button.textContent = "✓";
+    button.classList.add("done");
+    setTimeout(() => {
+      button.textContent = "+";
+      button.classList.remove("done");
+    }, 1200);
+  }
+
+  function renderGroupedCard(section, item) {
+    const displayName = getDisplayName(item);
+    return `
+      <div class="card packaged-card" data-cat="${section.id}">
+        <div class="card-top">
+          <div class="card-top-text">
+            <div class="dish-name">${escapeHtml(displayName)}</div>
+          </div>
+          <div class="group-photo-ph">${item.emoji || "🥤"}</div>
+        </div>
+        <div class="card-body">
+          ${item.note ? `<div class="dish-desc">${escapeHtml(item.note)}</div>` : ""}
+          <div class="group-list">
+            ${item.groupedItems.map((entry, index) => {
+              const entryId = `${item.id}-${entry.id || index}`;
+              ITEM_INDEX.set(entryId, {
+                id: entryId,
+                name: entry.name || entry.displayName,
+                displayName: entry.displayName || toDisplayCase(entry.name),
+                metaText: [displayName, entry.note].filter(Boolean).join(" · "),
+                sectionId: section.id,
+                sectionLabel: section.label,
+                basePrice: entry.price
+              });
+              return `
+                <div class="group-row">
+                  <div class="group-copy">
+                    <div class="group-name">${escapeHtml(entry.displayName || toDisplayCase(entry.name))}</div>
+                    ${entry.note ? `<div class="group-note">${escapeHtml(entry.note)}</div>` : ""}
+                  </div>
+                  <div class="group-actions">
+                    <div class="group-price">${formatPrice(entry.price)}</div>
+                    <button type="button" class="group-add" data-item-id="${escapeHtml(entryId)}" onclick="addGroupedCart(this)">+</button>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   function renderCard(section, item) {
+    if (item.groupedItems) {
+      return renderGroupedCard(section, item);
+    }
     const displayName = getDisplayName(item);
     const metaText = getDishMeta(item);
     ITEM_INDEX.set(item.id, { ...item, displayName, metaText, sectionId: section.id, sectionLabel: section.label });
@@ -1357,11 +1687,11 @@
       <div class="card${item.variants ? " multi-size" : item.toppingPools ? " base-with-toppings" : " single-price"}" data-item-id="${item.id}" data-cat="${section.id}">
         <div class="card-top">
           <div class="card-top-text">
-            ${item.badge ? `<span class="badge badge-soft">${escapeHtml(item.badge)}</span>` : ""}
+            <div class="card-badges">${renderBadgeRow(item)}</div>
             <div class="dish-name">${escapeHtml(displayName)}</div>
           </div>
           ${item.imageSrc
-            ? `<img class="dish-photo" src="${escapeHtml(item.imageSrc)}" alt="${escapeHtml(displayName)}">`
+            ? `<img class="dish-photo${item.photoClass ? ` ${escapeHtml(item.photoClass)}` : ""}" src="${escapeHtml(item.imageSrc)}" alt="${escapeHtml(displayName)}">`
             : `<div class="dish-photo-ph">${item.emoji || "🍽"}</div>`}
         </div>
         <div class="card-body">
@@ -1427,6 +1757,13 @@
     return [...card.querySelectorAll(".tag-remove.removed")].map((tag) => tag.dataset.name);
   }
 
+  function updateCardBadges(card) {
+    const item = ITEM_INDEX.get(card.dataset.itemId);
+    const badgeRow = card.querySelector(".card-badges");
+    if (!item || !badgeRow) return;
+    badgeRow.innerHTML = renderBadgeRow(item, getRemovedIngredients(card));
+  }
+
   function getSignature(itemId, variantLabel, toppings, removedIngredients) {
     const toppingSignature = toppings.map((top) => top.name).sort().join("|");
     const ingredientSignature = [...removedIngredients].sort().join("|");
@@ -1463,6 +1800,7 @@
 
   function toggleIngredient(el) {
     el.classList.toggle("removed");
+    updateCardBadges(el.closest(".card"));
   }
 
   function addCart(btn) {
@@ -1471,9 +1809,42 @@
     const base = getBaseSelection(card);
     const toppings = getSelectedToppings(card);
     const removedIngredients = getRemovedIngredients(card);
+    const stateLabels = getActiveDynamicBadges(item, removedIngredients);
     const extra = toppings.reduce((sum, top) => sum + top.price, 0);
     const price = base.price + extra;
     const signature = getSignature(item.id, base.label, toppings, removedIngredients);
+    const existing = cartItems.find((entry) => entry.signature === signature);
+
+    if (existing) {
+      existing.qty += 1;
+      existing.stateLabels = stateLabels;
+    } else {
+      cartItems.push({
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        signature,
+        itemId: item.id,
+        name: item.name,
+        displayName: item.displayName,
+        metaText: item.metaText,
+        sectionLabel: item.sectionLabel,
+        variantLabel: base.label,
+        stateLabels,
+        tops: toppings.map((top) => top.name),
+        removedIngredients,
+        price,
+        qty: 1
+      });
+    }
+
+    flashAddButton(btn);
+    updateCartDisplay();
+  }
+
+  function addGroupedCart(btn) {
+    const item = ITEM_INDEX.get(btn.dataset.itemId);
+    if (!item) return;
+
+    const signature = getSignature(item.id, "", [], []);
     const existing = cartItems.find((entry) => entry.signature === signature);
 
     if (existing) {
@@ -1487,21 +1858,16 @@
         displayName: item.displayName,
         metaText: item.metaText,
         sectionLabel: item.sectionLabel,
-        variantLabel: base.label,
-        tops: toppings.map((top) => top.name),
-        removedIngredients,
-        price,
+        variantLabel: "",
+        stateLabels: [],
+        tops: [],
+        removedIngredients: [],
+        price: item.basePrice,
         qty: 1
       });
     }
 
-    btn.textContent = "✓";
-    btn.classList.add("done");
-    setTimeout(() => {
-      btn.textContent = "+";
-      btn.classList.remove("done");
-    }, 1200);
-
+    flashAddButton(btn);
     updateCartDisplay();
   }
 
@@ -1548,7 +1914,7 @@
         <div class="cart-item-row">
           <div style="flex: 1; min-width: 0;">
             <div class="cart-item-name">${escapeHtml(item.displayName || toDisplayCase(item.name))}</div>
-            <div class="cart-item-meta">${[...meta, item.metaText].filter(Boolean).map(escapeHtml).join(" · ")}</div>
+            <div class="cart-item-meta">${[...meta, ...(Array.isArray(item.stateLabels) ? item.stateLabels : []), item.metaText].filter(Boolean).map(escapeHtml).join(" · ")}</div>
             ${item.tops.length ? `<div class="cart-item-tops">${item.tops.map(escapeHtml).join(", ")}</div>` : ""}
             ${item.removedIngredients.length ? `<div class="cart-item-tops">Убрать: ${item.removedIngredients.map(escapeHtml).join(", ")}</div>` : ""}
           </div>
@@ -1602,7 +1968,7 @@
   function setActiveNav(topId, drinkId = activeDrinkNav) {
     const drinkNav = document.getElementById("drink-nav");
     const showDrinks = topId === "drinks";
-    const nextDrinkId = DRINK_SECTION_IDS.includes(drinkId) ? drinkId : activeDrinkNav;
+    const nextDrinkId = DRINK_NAV_ITEMS.some((item) => item.id === drinkId) ? drinkId : activeDrinkNav;
     const topChanged = activeTopNav !== topId;
     const drinkChanged = activeDrinkNav !== nextDrinkId;
     const subnavWasVisible = drinkNav.classList.contains("show");
@@ -1636,19 +2002,13 @@
   }
 
   function scrollToSection(sectionId) {
-    if (sectionId === "top") {
-      setActiveNav("all");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
     const target = document.querySelector(`#section-${sectionId}`);
     if (!target) return;
 
     if (DRINK_SECTION_IDS.includes(sectionId)) {
       setActiveNav("drinks", sectionId);
     } else {
-      setActiveNav(TOP_NAV_BY_SECTION[sectionId] || "all");
+      setActiveNav(TOP_NAV_BY_SECTION[sectionId] || "blini");
     }
 
     window.scrollTo({
@@ -1660,7 +2020,7 @@
   function getCurrentSectionId() {
     const sections = [...document.querySelectorAll(".menu-section")];
     const probeLine = updateHeaderOffset() + 24;
-    let currentId = sections[0]?.dataset.sectionId || "main";
+    let currentId = sections[0]?.dataset.sectionId || "blini";
 
     for (const section of sections) {
       if (section.getBoundingClientRect().top <= probeLine) {
@@ -1675,7 +2035,7 @@
 
   function syncNavWithScroll() {
     if (window.scrollY < 36) {
-      setActiveNav("all");
+      setActiveNav("blini", "coffee");
       return;
     }
 
@@ -1685,7 +2045,7 @@
       return;
     }
 
-    setActiveNav(TOP_NAV_BY_SECTION[sectionId] || "all");
+    setActiveNav(TOP_NAV_BY_SECTION[sectionId] || "blini");
   }
 
   function handleScroll() {
@@ -1714,6 +2074,7 @@
         cartItems = saved.map((item) => ({
           ...item,
           tops: Array.isArray(item.tops) ? item.tops : [],
+          stateLabels: Array.isArray(item.stateLabels) ? item.stateLabels : [],
           removedIngredients: Array.isArray(item.removedIngredients) ? item.removedIngredients : [],
           displayName: item.displayName || toDisplayCase(item.name),
           metaText: item.metaText || ""
