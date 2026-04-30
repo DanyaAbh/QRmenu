@@ -158,6 +158,8 @@
   .subcats.show {
     max-height: 52px;
     opacity: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
     pointer-events: auto;
     transform: translateY(0);
   }
@@ -926,6 +928,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     padding: 16px 0 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     margin-top: 2px;
@@ -938,19 +941,39 @@
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
-  .cart-close-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+  .cart-exp-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .cart-action-btn {
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
     border: none;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.08);
-    font-size: 13px;
-    font-weight: 700;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    font-size: 12px;
+    font-weight: 800;
     color: var(--text);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Nunito", sans-serif;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.68) inset;
+  }
+
+  .cart-action-btn.clear {
+    color: rgba(210, 70, 45, 0.88);
+    background: rgba(255, 122, 90, 0.14);
+    border-color: rgba(255, 122, 90, 0.34);
+  }
+
+  .cart-action-btn.collapse {
+    color: rgba(70, 32, 10, 0.72);
   }
 
   .cart-items-list {
@@ -960,19 +983,24 @@
   }
 
   .cart-item-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto 72px;
     align-items: center;
-    gap: 8px;
-    padding: 10px 0;
+    gap: 10px;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.28);
   }
 
+  .cart-item-main {
+    min-width: 0;
+  }
+
   .cart-item-name {
-    flex: 1;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text);
-    line-height: 1.2;
+    line-height: 1.18;
+    overflow-wrap: anywhere;
   }
 
   .cart-item-meta,
@@ -980,8 +1008,18 @@
     font-size: 11px;
     font-weight: 600;
     color: rgba(100, 60, 20, 0.50);
-    margin-top: 2px;
+    margin-top: 4px;
     line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .cart-item-tops {
+    color: rgba(85, 52, 34, 0.60);
+  }
+
+  .cart-item-label {
+    font-weight: 800;
+    color: rgba(80, 40, 10, 0.58);
   }
 
   .qty-row {
@@ -1019,7 +1057,7 @@
     font-size: 14px;
     font-weight: 800;
     color: var(--accent);
-    min-width: 68px;
+    min-width: 72px;
     text-align: right;
   }
 
@@ -1114,7 +1152,10 @@
   <div class="cart-expanded">
     <div class="cart-exp-header">
       <span class="cart-exp-title">Ваш заказ</span>
-      <button class="cart-close-btn" onclick="event.stopPropagation(); closeCart()">✕</button>
+      <div class="cart-exp-actions">
+        <button class="cart-action-btn clear" onclick="event.stopPropagation(); clearCart()">Очистить</button>
+        <button class="cart-action-btn collapse" onclick="event.stopPropagation(); closeCart()">Свернуть</button>
+      </div>
     </div>
     <div class="cart-items-list" id="cart-items"></div>
     <div class="cart-total-row">
@@ -1917,13 +1958,16 @@
     cartItemsEl.innerHTML = cartItems.map((item) => {
       const meta = [item.sectionLabel];
       if (item.variantLabel) meta.push(item.variantLabel);
+      const itemMeta = [...meta, ...(Array.isArray(item.stateLabels) ? item.stateLabels : []), item.metaText].filter(Boolean);
+      const tops = Array.isArray(item.tops) ? item.tops : [];
+      const removedIngredients = Array.isArray(item.removedIngredients) ? item.removedIngredients : [];
       return `
         <div class="cart-item-row">
-          <div style="flex: 1; min-width: 0;">
+          <div class="cart-item-main">
             <div class="cart-item-name">${escapeHtml(item.displayName || toDisplayCase(item.name))}</div>
-            <div class="cart-item-meta">${[...meta, ...(Array.isArray(item.stateLabels) ? item.stateLabels : []), item.metaText].filter(Boolean).map(escapeHtml).join(" · ")}</div>
-            ${item.tops.length ? `<div class="cart-item-tops">${item.tops.map(escapeHtml).join(", ")}</div>` : ""}
-            ${item.removedIngredients.length ? `<div class="cart-item-tops">Убрать: ${item.removedIngredients.map(escapeHtml).join(", ")}</div>` : ""}
+            <div class="cart-item-meta">${itemMeta.map(escapeHtml).join(" · ")}</div>
+            ${tops.length ? `<div class="cart-item-tops"><span class="cart-item-label">Добавки:</span> ${tops.map(escapeHtml).join(", ")}</div>` : ""}
+            ${removedIngredients.length ? `<div class="cart-item-tops"><span class="cart-item-label">Убрать:</span> ${removedIngredients.map(escapeHtml).join(", ")}</div>` : ""}
           </div>
           <div class="qty-row">
             <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
@@ -1943,6 +1987,12 @@
     if (item.qty <= 0) {
       cartItems = cartItems.filter((entry) => entry.id !== id);
     }
+    updateCartDisplay();
+    renderCartItems();
+  }
+
+  function clearCart() {
+    cartItems = [];
     updateCartDisplay();
     renderCartItems();
   }
