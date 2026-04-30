@@ -89,6 +89,13 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.45);
     padding: max(14px, env(safe-area-inset-top)) 20px 12px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 4px 20px rgba(180, 80, 20, 0.08);
+    transition: padding 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
+  }
+
+  body.header-compact .header {
+    background: rgba(255, 255, 255, 0.30);
+    padding-bottom: 9px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.66) inset, 0 6px 24px rgba(180, 80, 20, 0.10);
   }
 
   .brand {
@@ -99,12 +106,46 @@
     justify-content: center;
     gap: 8px;
     text-align: center;
+    transition: margin-bottom 0.24s ease, max-height 0.24s ease, opacity 0.22s ease, transform 0.24s ease;
+    max-height: 78px;
+  }
+
+  body.header-compact .brand {
+    margin-bottom: 5px;
+    max-height: 44px;
+    opacity: 0.92;
+    transform: translateY(-2px);
   }
 
   .logo-wrap {
     width: min(150px, 44%);
     padding: 4px 0 0;
     margin: 0 auto;
+    transform-origin: center top;
+    transition: width 0.24s ease, padding 0.24s ease, transform 0.24s ease, opacity 0.24s ease;
+  }
+
+  body.header-compact .logo-wrap {
+    width: min(96px, 30%);
+    padding-top: 0;
+  }
+
+  .logo-wrap.logo-intro {
+    animation: logoIntro 0.42s cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .header-nav.nav-intro {
+    animation: navIntro 0.34s cubic-bezier(.22, 1, .36, 1) 70ms both;
+  }
+
+  @keyframes logoIntro {
+    from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes navIntro {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .logo-mark {
@@ -139,6 +180,9 @@
     overflow-x: auto;
     scrollbar-width: none;
     padding-bottom: 2px;
+    position: relative;
+    --nav-indicator-bg: rgba(255, 122, 60, 0.78);
+    --nav-indicator-shadow: 0 4px 12px rgba(255, 100, 40, 0.30);
   }
 
   .cats::-webkit-scrollbar,
@@ -153,6 +197,8 @@
     pointer-events: none;
     transform: translateY(-6px);
     transition: max-height 0.24s ease, opacity 0.2s ease, transform 0.2s ease;
+    --nav-indicator-bg: rgba(255, 122, 60, 0.18);
+    --nav-indicator-shadow: 0 4px 10px rgba(255, 100, 40, 0.16);
   }
 
   .subcats.show {
@@ -178,9 +224,16 @@
     font-size: 12px;
     font-weight: 800;
     cursor: pointer;
-    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
     font-family: "Nunito", sans-serif;
+  }
+
+  .cat:active,
+  .subcat:active {
+    transform: scale(0.96);
   }
 
   .subcat {
@@ -193,16 +246,33 @@
 
   .cat.active,
   .subcat.active {
-    background: rgba(255, 122, 60, 0.78);
+    background: transparent;
     border-color: rgba(255, 160, 100, 0.6);
     color: #fff;
-    box-shadow: 0 1px 0 rgba(255, 200, 150, 0.5) inset, 0 4px 12px rgba(255, 100, 40, 0.30);
+    box-shadow: none;
   }
 
   .subcat.active {
-    background: rgba(255, 122, 60, 0.24);
+    background: transparent;
     color: var(--accent);
-    box-shadow: 0 1px 0 rgba(255, 200, 150, 0.5) inset, 0 4px 10px rgba(255, 100, 40, 0.16);
+    box-shadow: none;
+  }
+
+  .nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--indicator-width, 0px);
+    height: calc(100% - 2px);
+    border-radius: 999px;
+    background: var(--nav-indicator-bg);
+    border: 1px solid rgba(255, 160, 100, 0.6);
+    box-shadow: 0 1px 0 rgba(255, 200, 150, 0.5) inset, var(--nav-indicator-shadow);
+    opacity: var(--indicator-opacity, 0);
+    transform: translateX(var(--indicator-left, 0px));
+    transition: transform 0.26s cubic-bezier(.22, 1, .36, 1), width 0.26s cubic-bezier(.22, 1, .36, 1), opacity 0.18s ease;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .list {
@@ -216,6 +286,11 @@
     scroll-margin-top: calc(var(--header-offset, 170px) + 14px);
   }
 
+  .menu-section.section-entering .section-label {
+    color: rgba(255, 122, 60, 0.88);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(255, 122, 60, 0.22);
+  }
+
   .section-label {
     font-size: 11px;
     font-weight: 800;
@@ -224,6 +299,7 @@
     color: rgba(80, 40, 10, 0.46);
     padding: 22px 20px 10px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: color 0.34s ease, text-shadow 0.34s ease, opacity 0.34s ease, transform 0.34s ease;
   }
 
   .card {
@@ -236,8 +312,8 @@
     border: 1px solid rgba(255, 255, 255, 0.56);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.80) inset, 0 -1px 0 rgba(0, 0, 0, 0.04) inset,
       0 12px 40px rgba(180, 80, 20, 0.13), 0 2px 8px rgba(180, 80, 20, 0.08);
-    animation: fadeUp 0.45s cubic-bezier(.22, 1, .36, 1) both;
     position: relative;
+    transition: transform 0.18s ease, opacity 0.38s cubic-bezier(.22, 1, .36, 1), box-shadow 0.2s ease;
   }
 
   .card::before {
@@ -257,9 +333,59 @@
     transform: scale(0.985);
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+  .card.added-pulse {
+    animation: cardAddedPulse 0.42s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  @keyframes cardAddedPulse {
+    0% { transform: scale(1); }
+    42% {
+      transform: scale(1.012);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.86) inset, 0 -1px 0 rgba(0, 0, 0, 0.04) inset,
+        0 16px 46px rgba(255, 100, 40, 0.18), 0 2px 10px rgba(180, 80, 20, 0.10);
+    }
+    100% { transform: scale(1); }
+  }
+
+  .motion-ready .card,
+  .motion-ready .section-label {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .motion-ready .card.is-revealed,
+  .motion-ready .section-label.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .motion-ready .card .dish-photo,
+  .motion-ready .card .dish-photo-ph,
+  .motion-ready .card .group-photo-ph {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    transition: opacity 0.38s cubic-bezier(.22, 1, .36, 1), transform 0.38s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 55ms);
+  }
+
+  .motion-ready .card.is-revealed .dish-photo,
+  .motion-ready .card.is-revealed .dish-photo-ph,
+  .motion-ready .card.is-revealed .group-photo-ph {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .dish-photo.photo-lift,
+  .dish-photo-ph.photo-lift,
+  .group-photo-ph.photo-lift {
+    animation: photoLift 0.34s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  @keyframes photoLift {
+    0% { transform: translateY(0) scale(1); }
+    48% { transform: translateY(-7px) scale(1.025); }
+    100% { transform: translateY(0) scale(1); }
   }
 
   .card-top {
@@ -476,6 +602,17 @@
     box-shadow: 0 1px 0 rgba(255, 200, 150, 0.5) inset, 0 4px 14px rgba(255, 100, 40, 0.18);
   }
 
+  .variant-chip.just-toggled,
+  .top-card.just-toggled {
+    animation: choicePop 0.24s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  @keyframes choicePop {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.045); }
+    100% { transform: scale(1); }
+  }
+
   .tags-row {
     display: flex;
     flex-wrap: wrap;
@@ -505,6 +642,8 @@
     cursor: pointer;
     transition: all 0.15s ease;
     box-shadow: 0 1px 0 rgba(255, 200, 180, 0.4) inset;
+    overflow: hidden;
+    position: relative;
   }
 
   .tag-remove::before {
@@ -522,6 +661,31 @@
 
   .tag-remove.removed::before {
     content: "+ ";
+  }
+
+  .tag-remove.just-toggled {
+    animation: choicePop 0.24s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .tag-remove.just-toggled::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 50%;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.32;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: lineSweep 0.26s ease;
+    pointer-events: none;
+  }
+
+  @keyframes lineSweep {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
   }
 
   .tops-group-block {
@@ -573,6 +737,7 @@
     scrollbar-width: none;
     margin-bottom: 4px;
     padding-bottom: 4px;
+    animation: topsGroupEnter 0.2s cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .tops-scroll::-webkit-scrollbar {
@@ -581,6 +746,27 @@
 
   .tops-scroll:not(.active) {
     display: none;
+  }
+
+  .tops-scroll.entering {
+    display: flex;
+    animation: topsGroupEnter 0.22s cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .tops-scroll.leaving {
+    display: flex;
+    pointer-events: none;
+    animation: topsGroupLeave 0.18s ease both;
+  }
+
+  @keyframes topsGroupEnter {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes topsGroupLeave {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-8px); }
   }
 
   .top-card {
@@ -700,6 +886,53 @@
     display: flex;
     align-items: center;
     box-shadow: 0 3px 12px rgba(255, 100, 60, 0.28);
+    min-width: 72px;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.2s ease;
+  }
+
+  .price-pill.price-changing {
+    animation: priceChange 0.24s ease;
+    box-shadow: 0 4px 16px rgba(255, 100, 60, 0.34);
+    color: transparent;
+  }
+
+  .price-pill.price-changing::before,
+  .price-pill.price-changing::after {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    pointer-events: none;
+  }
+
+  .price-pill.price-changing::before {
+    content: attr(data-prev-price);
+    animation: priceOldOut 0.24s ease forwards;
+  }
+
+  .price-pill.price-changing::after {
+    content: attr(data-next-price);
+    animation: priceNewIn 0.24s ease forwards;
+  }
+
+  @keyframes priceChange {
+    0% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes priceOldOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-9px); }
+  }
+
+  @keyframes priceNewIn {
+    from { opacity: 0; transform: translateY(9px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .add-circle {
@@ -848,8 +1081,14 @@
     border-top: 1px solid rgba(255, 255, 255, 0.70);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.90) inset, 0 -8px 40px rgba(180, 80, 20, 0.16);
     padding: 16px 20px max(36px, calc(env(safe-area-inset-bottom) + 16px));
-    transition: transform 0.35s cubic-bezier(.34, 1.56, .64, 1);
+    transition: transform 0.35s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.26s ease, border-color 0.26s ease;
     z-index: 200;
+  }
+
+  .cart.cart-attention {
+    border-top-color: rgba(255, 150, 80, 0.88);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 -8px 40px rgba(180, 80, 20, 0.16),
+      0 -5px 24px rgba(255, 122, 60, 0.22);
   }
 
   .cart.show {
@@ -991,6 +1230,26 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.28);
   }
 
+  .cart-item-row.cart-row-enter {
+    animation: cartRowEnter 0.28s cubic-bezier(.22, 1, .36, 1) both;
+    animation-delay: var(--cart-row-delay, 0ms);
+  }
+
+  .cart-item-row.cart-row-exit {
+    animation: cartRowExit 0.24s ease both;
+    animation-delay: var(--cart-row-delay, 0ms);
+  }
+
+  @keyframes cartRowEnter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cartRowExit {
+    from { opacity: 1; max-height: 96px; transform: translateY(0); }
+    to { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; transform: translateY(-6px); }
+  }
+
   .cart-item-main {
     min-width: 0;
   }
@@ -1085,9 +1344,20 @@
   }
 
   .cart-grand-total {
+    display: inline-block;
     font-size: 20px;
     font-weight: 900;
     color: var(--accent);
+  }
+
+  .cart-grand-total.total-flash {
+    animation: totalFlash 0.38s ease;
+  }
+
+  @keyframes totalFlash {
+    0% { transform: scale(1); text-shadow: none; }
+    42% { transform: scale(1.06); text-shadow: 0 8px 22px rgba(255, 122, 60, 0.28); }
+    100% { transform: scale(1); text-shadow: none; }
   }
 
   .order-btn {
@@ -1102,6 +1372,26 @@
     font-weight: 800;
     font-family: "Nunito", sans-serif;
     box-shadow: 0 1px 0 rgba(255, 220, 180, 0.5) inset, 0 4px 16px rgba(255, 100, 40, 0.30);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    body::before,
+    body::after {
+      animation: none;
+    }
   }
 </style>
 </head>
@@ -1524,6 +1814,11 @@
   let activeTopNav = "blini";
   let activeDrinkNav = "coffee";
   let scrollTicking = false;
+  let sectionScrollFrame = null;
+  let clearCartTimer = null;
+  const reduceMotionQuery = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : { matches: false };
 
   function escapeHtml(text) {
     return String(text)
@@ -1680,6 +1975,26 @@
     }, 1200);
   }
 
+  function replayClass(element, className, duration = 320) {
+    if (!element || reduceMotionQuery.matches) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+    window.setTimeout(() => element.classList.remove(className), duration);
+  }
+
+  function liftCardPhoto(card) {
+    const media = card?.querySelector(".dish-photo, .dish-photo-ph, .group-photo-ph");
+    replayClass(media, "photo-lift", 380);
+  }
+
+  function playIntroMotion() {
+    if (reduceMotionQuery.matches) return;
+    document.body.classList.add("intro-ready");
+    replayClass(document.querySelector(".logo-wrap"), "logo-intro", 520);
+    replayClass(document.querySelector(".header-nav"), "nav-intro", 520);
+  }
+
   function renderGroupedCard(section, item) {
     const displayName = getDisplayName(item);
     return `
@@ -1772,6 +2087,9 @@
       </section>
     `).join("");
     document.getElementById("list").innerHTML = html;
+    document.querySelectorAll(".card").forEach((card) => {
+      card.addEventListener("pointerdown", () => liftCardPhoto(card), { passive: true });
+    });
   }
 
   function getCount() {
@@ -1818,36 +2136,105 @@
     return [itemId, variantLabel || "", toppingSignature, ingredientSignature].join("::");
   }
 
-  function updateCardPrice(card) {
+  function animatePriceChange(priceEl, nextText, animate = true) {
+    if (!priceEl || priceEl.textContent === nextText) return;
+    if (!animate || reduceMotionQuery.matches) {
+      priceEl.textContent = nextText;
+      return;
+    }
+    priceEl.dataset.prevPrice = priceEl.textContent;
+    priceEl.dataset.nextPrice = nextText;
+    priceEl.textContent = nextText;
+    replayClass(priceEl, "price-changing", 260);
+  }
+
+  function updateCardPrice(card, animate = true) {
     const base = getBaseSelection(card);
     const extra = getSelectedToppings(card).reduce((sum, top) => sum + top.price, 0);
     const total = base.price + extra;
-    card.querySelector(".price-pill").textContent = formatPrice(total);
+    animatePriceChange(card.querySelector(".price-pill"), formatPrice(total), animate);
+  }
+
+  function resetCardSelection(card) {
+    if (!card) return;
+
+    const firstVariant = card.querySelector(".variant-chip");
+    if (firstVariant) {
+      card.querySelectorAll(".variant-chip").forEach((chip) => chip.classList.toggle("selected", chip === firstVariant));
+    }
+
+    card.querySelectorAll(".top-card.selected").forEach((top) => top.classList.remove("selected"));
+    card.querySelectorAll(".tag-remove.removed").forEach((tag) => tag.classList.remove("removed"));
+    updateCardBadges(card);
+    updateCardPrice(card, false);
+  }
+
+  function flashCartTotal() {
+    replayClass(document.getElementById("cart-grand"), "total-flash", 420);
+  }
+
+  function flashCartBar() {
+    replayClass(document.getElementById("cart"), "cart-attention", 480);
+  }
+
+  function animateCartRows() {
+    if (reduceMotionQuery.matches) return;
+    document.querySelectorAll(".cart-item-row").forEach((row, index) => {
+      row.style.setProperty("--cart-row-delay", Math.min(index * 42, 210) + "ms");
+      replayClass(row, "cart-row-enter", 360 + Math.min(index * 42, 210));
+    });
+  }
+
+  function switchToppingGroup(block, nextTab) {
+    const nextTarget = block.querySelector(`[data-group-id="${nextTab.dataset.target}"]`);
+    const currentScroll = block.querySelector(".tops-scroll.active");
+    const currentTab = block.querySelector(".tops-tab.active");
+    if (!nextTarget || nextTarget === currentScroll) return;
+
+    currentTab?.classList.remove("active");
+    nextTab.classList.add("active");
+
+    if (reduceMotionQuery.matches || !currentScroll) {
+      currentScroll?.classList.remove("active", "entering", "leaving");
+      nextTarget.classList.add("active");
+      nextTarget.classList.remove("entering", "leaving");
+      return;
+    }
+
+    currentScroll.classList.remove("entering");
+    currentScroll.classList.add("leaving");
+
+    window.setTimeout(() => {
+      currentScroll.classList.remove("active", "leaving");
+      nextTarget.classList.add("active", "entering");
+      window.setTimeout(() => {
+        nextTarget.classList.remove("entering");
+      }, 230);
+    }, 120);
   }
 
   function toggleVariant(el) {
     const card = el.closest(".card");
     card.querySelectorAll(".variant-chip").forEach((chip) => chip.classList.remove("selected"));
     el.classList.add("selected");
+    replayClass(el, "just-toggled", 280);
     updateCardPrice(card);
   }
 
   function toggleToppingGroup(el) {
     const block = el.closest(".tops-group-block");
-    block.querySelectorAll(".tops-tab").forEach((tab) => tab.classList.remove("active"));
-    block.querySelectorAll(".tops-scroll").forEach((scroll) => scroll.classList.remove("active"));
-    el.classList.add("active");
-    const target = block.querySelector(`[data-group-id="${el.dataset.target}"]`);
-    if (target) target.classList.add("active");
+    switchToppingGroup(block, el);
   }
 
   function toggleTopping(el) {
     el.classList.toggle("selected");
+    replayClass(el, "just-toggled", 280);
     updateCardPrice(el.closest(".card"));
   }
 
   function toggleIngredient(el) {
     el.classList.toggle("removed");
+    replayClass(el, "just-toggled", 280);
     updateCardBadges(el.closest(".card"));
   }
 
@@ -1886,6 +2273,10 @@
 
     flashAddButton(btn);
     updateCartDisplay();
+    flashCartBar();
+    replayClass(card, "added-pulse", 460);
+    liftCardPhoto(card);
+    resetCardSelection(card);
   }
 
   function addGroupedCart(btn) {
@@ -1917,6 +2308,9 @@
 
     flashAddButton(btn);
     updateCartDisplay();
+    flashCartBar();
+    replayClass(btn.closest(".card"), "added-pulse", 460);
+    liftCardPhoto(btn.closest(".card"));
   }
 
   function updateCartDisplay() {
@@ -1931,6 +2325,7 @@
 
     document.getElementById("cart-total").textContent = formatPrice(total);
     document.getElementById("cart-grand").textContent = formatPrice(total);
+    flashCartTotal();
     document.getElementById("cart-sub").textContent = formatItemCount(count);
 
     const cart = document.getElementById("cart");
@@ -1943,6 +2338,7 @@
 
     if (cart.classList.contains("open")) {
       renderCartItems();
+      animateCartRows();
     }
 
     saveCart();
@@ -1992,14 +2388,49 @@
   }
 
   function clearCart() {
+    clearCartWithMotion();
+  }
+
+  function finishClearCart() {
     cartItems = [];
     updateCartDisplay();
     renderCartItems();
   }
 
+  function clearCartWithMotion() {
+    if (!cartItems.length) return;
+    if (clearCartTimer) {
+      window.clearTimeout(clearCartTimer);
+      clearCartTimer = null;
+    }
+
+    if (reduceMotionQuery.matches) {
+      finishClearCart();
+      return;
+    }
+
+    const rows = [...document.querySelectorAll(".cart-item-row")];
+    if (!rows.length) {
+      finishClearCart();
+      return;
+    }
+
+    rows.forEach((row, index) => {
+      row.style.setProperty("--cart-row-delay", Math.min(index * 32, 160) + "ms");
+      row.classList.remove("cart-row-enter");
+      row.classList.add("cart-row-exit");
+    });
+
+    clearCartTimer = window.setTimeout(() => {
+      clearCartTimer = null;
+      finishClearCart();
+    }, 360);
+  }
+
   function openCart() {
     if (getCount() === 0) return;
     renderCartItems();
+    animateCartRows();
     document.getElementById("cart").classList.add("open");
     document.getElementById("cart-overlay").classList.add("show");
   }
@@ -2017,9 +2448,116 @@
     return height;
   }
 
+  function syncHeaderCompact() {
+    const shouldCompact = window.scrollY > 70;
+    const changed = document.body.classList.toggle("header-compact", shouldCompact);
+    if (changed) {
+      window.requestAnimationFrame(() => {
+        updateHeaderOffset();
+        syncNavIndicators();
+      });
+    }
+  }
+
+  function ensureNavIndicator(container) {
+    if (!container) return null;
+    let indicator = container.querySelector(".nav-indicator");
+    if (!indicator) {
+      indicator = document.createElement("span");
+      indicator.className = "nav-indicator";
+      indicator.setAttribute("aria-hidden", "true");
+      container.prepend(indicator);
+    }
+    return indicator;
+  }
+
+  function updateNavIndicator(container, activeButton) {
+    const indicator = ensureNavIndicator(container);
+    if (!indicator || !activeButton) {
+      return;
+    }
+
+    indicator.style.setProperty("--indicator-left", activeButton.offsetLeft + "px");
+    indicator.style.setProperty("--indicator-width", activeButton.offsetWidth + "px");
+    indicator.style.setProperty("--indicator-opacity", "1");
+  }
+
+  function syncNavIndicators() {
+    requestAnimationFrame(() => {
+      const cats = document.querySelector(".cats");
+      const subcats = document.querySelector(".subcats");
+      updateNavIndicator(cats, cats?.querySelector(".cat.active"));
+
+      if (subcats?.classList.contains("show")) {
+        updateNavIndicator(subcats, subcats.querySelector(".subcat.active"));
+      }
+    });
+  }
+
+  function initNavIndicators() {
+    ensureNavIndicator(document.querySelector(".cats"));
+    ensureNavIndicator(document.querySelector(".subcats"));
+    syncNavIndicators();
+  }
+
   function keepButtonVisible(button) {
     if (!button) return;
     button.scrollIntoView({ inline: "center", block: "nearest" });
+  }
+
+  function revealImmediately() {
+    document.querySelectorAll(".card, .section-label").forEach((element) => {
+      element.classList.add("is-revealed");
+    });
+  }
+
+  function initRevealMotion() {
+    revealImmediately();
+    if (reduceMotionQuery.matches || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    document.body.classList.add("motion-ready");
+    const revealItems = document.querySelectorAll(".card, .section-label");
+    const revealElement = (element) => {
+      element.classList.add("is-revealed");
+      const delay = parseInt(element.style.getPropertyValue("--reveal-delay") || "0", 10);
+      window.setTimeout(() => {
+        element.style.removeProperty("--reveal-delay");
+      }, delay + 460);
+    };
+
+    revealItems.forEach((element) => {
+      element.classList.remove("is-revealed");
+      const section = element.closest(".menu-section");
+      const cardsBefore = section ? [...section.querySelectorAll(".card")].indexOf(element) : 0;
+      const delay = element.classList.contains("section-label") ? 0 : Math.min(Math.max(cardsBefore, 0) * 45, 150);
+      element.style.setProperty("--reveal-delay", delay + "ms");
+    });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        revealElement(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.12
+    });
+
+    revealItems.forEach((element) => revealObserver.observe(element));
+  }
+
+  function highlightSection(section) {
+    if (!section || reduceMotionQuery.matches) return;
+    section.classList.remove("section-entering");
+    window.requestAnimationFrame(() => {
+      section.classList.add("section-entering");
+      window.setTimeout(() => {
+        section.classList.remove("section-entering");
+      }, 620);
+    });
   }
 
   function setActiveNav(topId, drinkId = activeDrinkNav) {
@@ -2051,11 +2589,50 @@
     if (subnavWasVisible !== showDrinks) {
       updateHeaderOffset();
     }
+    syncNavIndicators();
   }
 
   function getSectionTop(section) {
     const headerOffset = updateHeaderOffset() + 14;
     return window.scrollY + section.getBoundingClientRect().top - headerOffset;
+  }
+
+  function fastScrollTo(top) {
+    const startTop = window.scrollY;
+    const targetTop = Math.max(top, 0);
+    const distance = targetTop - startTop;
+    const duration = Math.min(Math.max(Math.abs(distance) * 0.18, 180), 280);
+    const initialScrollBehavior = document.documentElement.style.scrollBehavior;
+
+    if (sectionScrollFrame) {
+      cancelAnimationFrame(sectionScrollFrame);
+      sectionScrollFrame = null;
+    }
+
+    if (reduceMotionQuery.matches || Math.abs(distance) < 2) {
+      window.scrollTo({ top: targetTop, behavior: "auto" });
+      return;
+    }
+
+    document.documentElement.style.scrollBehavior = "auto";
+    const startedAt = performance.now();
+    const easeOut = (progress) => 1 - Math.pow(1 - progress, 3);
+
+    const step = (now) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      window.scrollTo(0, startTop + distance * easeOut(progress));
+
+      if (progress < 1) {
+        sectionScrollFrame = requestAnimationFrame(step);
+        return;
+      }
+
+      sectionScrollFrame = null;
+      document.documentElement.style.scrollBehavior = initialScrollBehavior;
+      syncNavWithScroll();
+    };
+
+    sectionScrollFrame = requestAnimationFrame(step);
   }
 
   function scrollToSection(sectionId) {
@@ -2068,10 +2645,8 @@
       setActiveNav(TOP_NAV_BY_SECTION[sectionId] || "blini");
     }
 
-    window.scrollTo({
-      top: Math.max(getSectionTop(target), 0),
-      behavior: "smooth"
-    });
+    fastScrollTo(getSectionTop(target));
+    highlightSection(target);
   }
 
   function getCurrentSectionId() {
@@ -2109,6 +2684,7 @@
     if (scrollTicking) return;
     scrollTicking = true;
     window.requestAnimationFrame(() => {
+      syncHeaderCompact();
       syncNavWithScroll();
       scrollTicking = false;
     });
@@ -2143,14 +2719,20 @@
   }
 
   renderMenu();
+  playIntroMotion();
+  initNavIndicators();
+  initRevealMotion();
   loadCart();
   updateCartDisplay();
+  syncHeaderCompact();
   updateHeaderOffset();
   syncNavWithScroll();
 
   window.addEventListener("resize", () => {
+    syncHeaderCompact();
     updateHeaderOffset();
     syncNavWithScroll();
+    syncNavIndicators();
   });
   window.addEventListener("scroll", handleScroll, { passive: true });
 </script>
